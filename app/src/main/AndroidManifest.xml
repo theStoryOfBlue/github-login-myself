@@ -33,7 +33,7 @@
 
                 <data
                     android:host="pureumgittest"
-                    android:scheme="github-auth"/>
+                    android:scheme="callback"/>
             </intent-filter>
 
 

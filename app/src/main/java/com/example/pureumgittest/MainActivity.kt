@@ -8,75 +8,56 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
+import com.example.pureumgittest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val binding : ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Log.e("TAG", "onCreate: start", )
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        login(this)
-
-//        val loginUrl = Uri.Builder().scheme("https").authority("github.com")
-//            .appendPath("login")
-//            .appendPath("oauth")
-//            .appendPath("authorize")
-//            .appendQueryParameter("client_id", BuildConfig.GIT_SECRET)
-//            .build()
-//        Log.e("TAG", "onCreate: $loginUrl", )
-//
-//        CustomTabsIntent.Builder().build().also {
-//            it.launchUrl(this, loginUrl)
-//        }
-    }
-
-    fun login(context: Context) {
-        val loginUrl = Uri.Builder().scheme("https").authority("github.com")
-            .appendPath("login")
-            .appendPath("oauth")
-            .appendPath("authorize")
-            .appendQueryParameter("client_id", BuildConfig.GIT_SECRET)
-            .build()
-
-        Log.e("TAG", "onCreate: $loginUrl", )
-
-        CustomTabsIntent.Builder().build().also {
-            it.launchUrl(context, loginUrl)
+        binding.button.setOnClickListener{
+            processLogin()
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    private fun processLogin() {
+        Log.e("TAG", "processLogin start", )
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(
+            "${BuildConfig.oauthLoginURL}?client_id=${BuildConfig.GIT_SECRET}"))
+        Log.e("TAG", "processLogin: ${intent.data}")
+        startActivity(intent)
+    }
 
-        val uri: Uri? = intent?.data
-
+    override fun onResume() {
         Log.e("TAG", "onResume: start", )
-
+        super.onResume()
+        val uri: Uri? = intent?.data
+        Log.e("TAG", "uri : $uri", )
         if (uri != null){
             val code = uri.getQueryParameter("code")
+            binding.textView.text = code
             Log.e("TAG", "onResume code : $code", )
-//            if(code != null){
+            if(code != null){
 //                showDialog()
 //                viewModel.getAccessToken(code)
-//                Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
 //            } else if((uri.getQueryParameter("error")) != null){
 //                Log.d(TAG, "error: ${uri.getQueryParameter("error")}")
 //                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
-//            }
+            }
         }
     }
 
-//    private fun processLogin() {
-//        Log.e("TAG", "processLogin start", )
-//        //showDialog()
-//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(
-//            "${BuildConfig.oauthLoginURL}?client_id=${BuildConfig.GIT_SECRET}&scope=repo"))
-//
-//        startActivity(intent)
-//    }
+
 
 }

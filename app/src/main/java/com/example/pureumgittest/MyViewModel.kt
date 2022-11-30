@@ -25,8 +25,6 @@ class MyViewModel :ViewModel() {
         viewModelScope.launch {
             try {
                 _accessToken.value = api.getAccessToken(BuildConfig.GIT_ID, BuildConfig.GIT_SECRET, code)
-                //Log.e("TAG", "viewmodel getAccessToken: $pureum", )
-                //Log.e(TAG, "AccessToken: ${_accessToken.value?.accessToken}")
             } catch (e: Exception) {
                 Log.e("TAG", "getAccessToken: error $e")
             }

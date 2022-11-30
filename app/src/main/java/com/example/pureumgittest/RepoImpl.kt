@@ -20,5 +20,4 @@ class RepoImpl : GitAPI_Repo {
             .build() // Retrofit Object Create
             .create(GitAPI_Repo::class.java).getAccessToken(clientID, clientSecret, code)
     }
-
 }

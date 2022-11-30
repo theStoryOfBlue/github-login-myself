@@ -32,8 +32,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="pureumgittest"
-                    android:scheme="callback"/>
+                    android:host="callback"
+                    android:scheme="pureumgittest"/>
             </intent-filter>
 
 

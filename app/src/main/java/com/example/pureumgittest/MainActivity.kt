@@ -8,7 +8,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.pureumgittest.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val myViewModel: MyViewModel by viewModels()
@@ -16,8 +18,6 @@ class MainActivity : AppCompatActivity() {
     private val binding : ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         myViewModel.accessToken.observe(this) { accessToken ->
-            binding.textView2.text = "[accessToken]\n $accessToken"
+            binding.textView2.text = "[accessToken]\n ${accessToken.accessToken}"
         }
     }
 
@@ -47,11 +47,9 @@ class MainActivity : AppCompatActivity() {
         Log.e("TAG", "onResume: start", )
         super.onResume()
         val uri: Uri? = intent?.data
-        Log.e("TAG", "uri : $uri", )
         if (uri != null){
             val code = uri.getQueryParameter("code")
-            binding.textView.text = "[github code]\n $code"
-            Log.e("TAG", "onResume code : $code", )
+            binding.textView.text = "[github code]\n ${code}"
             if(code != null){
                 Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
                 myViewModel.viewModeGetAccessToken(code)

@@ -1,6 +1,6 @@
 package com.kguard.data.module
 
-import com.example.data.Contents
+import com.example.data.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Contents.apiURL)
+            .baseUrl(BuildConfig.apiURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

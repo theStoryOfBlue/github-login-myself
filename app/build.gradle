@@ -22,6 +22,7 @@ android {
         buildConfigField "String", "GIT_SECRET", "\"${properties.getProperty("GIT_SECRET")}\""
         buildConfigField "String", "oauthLoginURL", "\"${properties.getProperty("oauthLoginURL")}\""
         buildConfigField "String", "domainURL", "\"${properties.getProperty("domainURL")}\""
+        buildConfigField "String", "apiURL", "\"${properties.getProperty("apiURL")}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

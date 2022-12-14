@@ -2,6 +2,8 @@ package com.kguard.data.module
 
 import com.example.data.datasource.TokenDataSource
 import com.example.data.datasource.TokenDataSourceImpl
+import com.example.data.datasource.UserDataSource
+import com.example.data.datasource.UserDataSourceImpl
 //import com.kguard.data.datasource.*
 import dagger.Module
 import dagger.Provides
@@ -19,11 +21,11 @@ object DataSourceModule {
     fun provideTokenDataSource(retrofit: Retrofit): TokenDataSource {
         return TokenDataSourceImpl(retrofit)
     }
-//    @Provides
-//    @Singleton
-//    fun provideUserDataSource(retrofit: Retrofit): UserDataSource {
-//        return UserDataSourceImpl(retrofit)
-//    }
+    @Provides
+    @Singleton
+    fun provideUserDataSource(retrofit: Retrofit): UserDataSource {
+        return UserDataSourceImpl(retrofit)
+    }
 //    @Provides
 //    @Singleton
 //    fun provideRepoDataSource(retrofit: Retrofit): RepoDataSource {

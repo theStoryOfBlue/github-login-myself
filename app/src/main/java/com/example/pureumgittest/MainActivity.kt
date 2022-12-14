@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             binding.textView.text = "[github code]\n ${code}"
             if(code != null){
                 Toast.makeText(this, "Login success!", Toast.LENGTH_SHORT).show()
-                myViewModel.viewModeGetAccessToken(code)
+                myViewModel.viewModelGetAccessToken(code)
             } else if((uri.getQueryParameter("error")) != null){
                 Log.d("TAG", "error: ${uri.getQueryParameter("error")}")
                 Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()

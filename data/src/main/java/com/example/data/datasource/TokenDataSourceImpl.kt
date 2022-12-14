@@ -1,5 +1,6 @@
 package com.example.data.datasource
 
+import android.util.Log
 import com.example.data.AccessToken
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -11,6 +12,7 @@ import javax.inject.Inject
 class TokenDataSourceImpl @Inject constructor(private val retrofit: Retrofit) :TokenDataSource {
     override suspend fun getAccessToken(clientId: String, clientSecret: String, code: String): AccessToken {
         val pu =retrofit.create(TokenDataSource::class.java).getAccessToken(clientId,clientSecret,code)
+        Log.e("TAG", "TokenDataSourceImpl pu : $pu", )
         return pu
     }
 }

@@ -55,15 +55,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         myViewModel.repo.observe(this) { repo ->
-            Log.e("TAG", "onCreate: $repo", )
             binding.repo.text = repo.toString()
         }
 
-//        binding.repoRecyclerview.layoutManager = LinearLayoutManager(this)
-//        binding.repoRecyclerview.adapter = adapter
-//        myViewModel.repo.observe(this){
-//            adapter.dataList.add(it)
-//        }
+
+        myViewModel.repo.observe(this){
+            //Log.e("TAG", "onCreate: $it ", )
+            binding.repoRecyclerview.layoutManager = LinearLayoutManager(this)
+            binding.repoRecyclerview.adapter = adapter
+            adapter.dataList.add(it)
+            Log.e("TAG", "onCreate: ${adapter.dataList}")
+        }
     }
 
     private fun processLogin() {

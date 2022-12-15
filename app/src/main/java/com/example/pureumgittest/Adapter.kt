@@ -1,5 +1,6 @@
 package com.example.pureumgittest
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class Adapter : RecyclerView.Adapter<Adapter.RepoListViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListViewHolder {
+        Log.e(javaClass.simpleName, "@@@ onCreateViewHolder: ", )
         val binding = ItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RepoListViewHolder(binding)
     }

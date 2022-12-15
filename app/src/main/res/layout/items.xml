@@ -24,7 +24,7 @@
             android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  id" />
+            android:text="       id : " />
 
         <TextView
             android:id="@+id/myid"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  name" />
+            android:text="  name : " />
 
         <TextView
             android:id="@+id/myname"
@@ -62,7 +62,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  isprivate" />
+            android:text="       isprivate : " />
 
         <TextView
             android:id="@+id/isprivate"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  language" />
+            android:text="  language : " />
 
         <TextView
             android:id="@+id/langugage"

@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.DomainAccessToken
+import com.example.domain.DomainRepo
+import com.example.domain.DomainUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 //import java.lang.Exception
@@ -20,16 +22,21 @@ import kotlin.Exception
 @HiltViewModel
 class MyViewModel @Inject constructor(
     private val tokenUseCase: TokenUseCase,
-    //private val userUseCase: UserUseCase
+    private val userUseCase: UserUseCase,
+    private val repoUseCase: RepoUseCase
 ) :ViewModel() {
 
-    private val _accessToken = MutableLiveData<DomainAccessToken>()
+    val _accessToken = MutableLiveData<DomainAccessToken>()
     val accessToken: LiveData<DomainAccessToken>
         get() = _accessToken
 
-    private val _UserData = MutableLiveData<DomainAccessToken>()
-    val UserData: LiveData<DomainAccessToken>
-        get() = _UserData
+    private val _userData = MutableLiveData<DomainUser>()
+    val userData: LiveData<DomainUser>
+        get() = _userData
+
+    private val _repo = MutableLiveData<List<DomainRepo>>()
+    val repo: MutableLiveData<List<DomainRepo>>
+        get() = _repo
 
     fun viewModelGetAccessToken(code: String) {
         Log.e("TAG", "getAccessToken: start", )
@@ -42,13 +49,24 @@ class MyViewModel @Inject constructor(
         }
     }
 
-    fun viewModelGetUserData(token: String){
+    fun viewModelGetUserData(){
         Log.e("TAG", "getAccessToken: start", )
         viewModelScope.launch {
             try{
-
+                Log.e("TAG", "viewModelGetUserData: ${_accessToken.value?.accessToken}", )
+                _userData.value = userUseCase.getUser("bearer ${_accessToken.value?.accessToken}")
             }catch (e:Exception){
+                Log.e("TAG", "getAccessToken error : $e")
+            }
+        }
+    }
 
+    fun viewModelGetRepo(){
+        viewModelScope.launch {
+            try {
+                _repo.value = repoUseCase.getRepo("bearer ${_accessToken.value?.accessToken}")
+            }catch (e:Exception){
+                Log.e("TAG", "viewModelGetRepo err : $e", )
             }
         }
     }

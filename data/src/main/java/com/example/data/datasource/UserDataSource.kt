@@ -1,6 +1,5 @@
 package com.example.data.datasource
 
-import com.example.data.BuildConfig
 import com.example.data.User
 import retrofit2.http.*
 
@@ -12,6 +11,6 @@ interface UserDataSource {
     @Headers("Accept: application/json")
     @GET("user")
     suspend fun getUserData(
-        @Header("authorization") token: String
+        @Header("Authorization") token: String
     ): User
 }

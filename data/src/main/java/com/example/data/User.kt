@@ -7,13 +7,13 @@ import com.example.domain.DomainUser
  * pureum
  */
 data class User(
-    val username: String,
+    val username: String?,
     val name: String,
-    val email: String,
-    val bio: String,
-    val location: String,
-    val followers: Int,
-    val following: Int,
+    val email: String?,
+    val bio: String?,
+    val location: String?,
+    val followers: Int?,
+    val following: Int?
 )
 
 fun User.toDomainUser() : DomainUser = DomainUser(

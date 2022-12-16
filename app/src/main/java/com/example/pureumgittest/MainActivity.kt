@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             //Log.e("TAG", "onCreate: $it ", )
             binding.repoRecyclerview.layoutManager = LinearLayoutManager(this)
             binding.repoRecyclerview.adapter = adapter
-            adapter.dataList.add(it)
+            adapter.dataList = it
             Log.e("TAG", "onCreate: ${adapter.dataList}")
         }
     }

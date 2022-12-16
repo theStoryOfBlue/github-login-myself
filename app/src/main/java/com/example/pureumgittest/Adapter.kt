@@ -13,14 +13,18 @@ import com.example.pureumgittest.databinding.ItemsBinding
  */
 class Adapter : RecyclerView.Adapter<Adapter.RepoListViewHolder>() {
 
-    val dataList = arrayListOf<List<DomainRepo>>()
+    var dataList = listOf<DomainRepo>()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     inner class RepoListViewHolder(private val binding: ItemsBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(list : List<DomainRepo>, now : Int){
-            binding.myid.text = list[now].id.toString()
-            binding.myname.text = list[now].name
-            binding.isprivate.text = list[now].isPrivate.toString()
-            binding.langugage.text = list[now].language
+        fun bind(list : DomainRepo){
+            binding.myid.text = list.id.toString()
+            binding.myname.text = list.name
+            binding.isprivate.text = list.isPrivate.toString()
+            binding.langugage.text = list.language
         }
     }
 
@@ -31,7 +35,7 @@ class Adapter : RecyclerView.Adapter<Adapter.RepoListViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RepoListViewHolder, position: Int) {
-        holder.bind(dataList[position], position)
+        holder.bind(dataList[position])
     }
 
     override fun getItemCount(): Int = dataList.size
